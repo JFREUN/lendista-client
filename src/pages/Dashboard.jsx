@@ -83,6 +83,7 @@ function Dashboard() {
   useEffect(() => {
     getProducts();
     getUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
 
   return (

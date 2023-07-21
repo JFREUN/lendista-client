@@ -9,7 +9,6 @@ function AdminSignup() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
-  const [pageTwo, setPageTwo] = useState(false);
   const [role, setRole] = useState("");
 
   const navigate = useNavigate();
@@ -47,7 +46,7 @@ function AdminSignup() {
       <h1>Admin Sign-Up</h1>
 
       <form onSubmit={handleSignupSubmit} className="loginForm">
-        {!pageTwo && (
+        
           <div className="pageWrapper">
             <input
               type="email"
@@ -80,7 +79,7 @@ function AdminSignup() {
 Do you agree to our T&Cs?            </label>
             <button type="submit" className="submitBtn">Sign Up</button>{" "}
           </div>
-        )}
+       
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

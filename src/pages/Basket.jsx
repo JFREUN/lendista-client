@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 
@@ -91,6 +90,7 @@ function Basket() {
 
   useEffect(() => {
     getUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [basketCount]);
 
   return (

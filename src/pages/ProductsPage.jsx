@@ -22,6 +22,7 @@ function ProductsPage() {
 
   useEffect(()=> {
     getProducts()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [!search])
 
   useEffect(()=>{
@@ -35,7 +36,7 @@ function ProductsPage() {
       })
       .catch((err) => console.log(err));
     }
-  }, [search])
+  }, [search, storedToken])
 
   return (
     <div className='productsPage'>

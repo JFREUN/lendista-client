@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 
 function MembershipChoice({ membership, setMembership, setCredits, credits }) {
   const handleMembershipChange = (value, creditsValue) => {
@@ -6,9 +5,6 @@ function MembershipChoice({ membership, setMembership, setCredits, credits }) {
     setCredits(creditsValue);
   };
 
-  useEffect(() => {
-    console.log(credits);
-  }, [credits]);
 
   return (
     <div className="pageWrapper">

@@ -7,7 +7,7 @@ import axios from "axios";
 
 const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
-function SignUpPage(props) {
+function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
