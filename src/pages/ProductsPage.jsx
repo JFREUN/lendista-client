@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import searchIcon from "../images/search_FILL0_wght400_GRAD0_opsz48.svg"
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
 function ProductsPage() {
     const [allProducts, setAllProducts] = useState([]);

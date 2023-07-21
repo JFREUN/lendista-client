@@ -8,7 +8,7 @@ import AllUsers from "../components/AllUsers";
 import icon from "../images/undraw_thought_process_re_om58.svg";
 import EditProduct from "../components/EditProduct";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
 function Dashboard() {
   const [hideForm, setHideForm] = useState(true);

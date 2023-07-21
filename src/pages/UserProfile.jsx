@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
 function UserProfile() {
   const [rentedItems, setRentedItems] = useState([]);
@@ -11,7 +11,6 @@ function UserProfile() {
   const [activeUser, setActiveUser] = useState("");
   const [pastRented, setPastRented] = useState([]);
   const [showPast, setShowPast] = useState(false);
-
 
   const { user } = useContext(AuthContext);
   const userId = user._id;
@@ -28,13 +27,16 @@ function UserProfile() {
         setActiveUser(response.data);
 
         const fetchedPastRented = response.data.pastRented;
-        const uniquePastRented = fetchedPastRented.reduce((accumulator, item) => {
-          const existingItem = accumulator.find((i) => i._id === item._id);
-          if (!existingItem) {
-            accumulator.push(item);
-          }
-          return accumulator;
-        }, []);
+        const uniquePastRented = fetchedPastRented.reduce(
+          (accumulator, item) => {
+            const existingItem = accumulator.find((i) => i._id === item._id);
+            if (!existingItem) {
+              accumulator.push(item);
+            }
+            return accumulator;
+          },
+          []
+        );
         setPastRented(uniquePastRented);
       })
       .catch((err) => console.log("Error fetching rented items: ", err));
@@ -47,22 +49,27 @@ function UserProfile() {
   const updateCredits = (membership) => {
     let updatedCredits;
 
-    if(membership === "S"){
-      updatedCredits= 50
-    } else if(membership === "M") {
-      updatedCredits = 100
+    if (membership === "S") {
+      updatedCredits = 50;
+    } else if (membership === "M") {
+      updatedCredits = 100;
     } else {
-      updatedCredits = 250
+      updatedCredits = 250;
     }
 
-    axios.put(`${API_URL}/api/users/${userId}`, {credits : updatedCredits}, {
-      headers: { Authorization: `Bearer ${storedToken}` },
-    })
-    .then((response) => {
-      console.log("Credits have been updated!")
-    })
-    .catch(err => console.log("Credit update error: ", err))
-  }
+    axios
+      .put(
+        `${API_URL}/api/users/${userId}`,
+        { credits: updatedCredits },
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      )
+      .then((response) => {
+        console.log("Credits have been updated!");
+      })
+      .catch((err) => console.log("Credit update error: ", err));
+  };
 
   const calculateRemainingDays = (createdDate) => {
     const currentDate = new Date();
@@ -99,9 +106,8 @@ function UserProfile() {
 
   useEffect(() => {
     getRentedItems();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
-
 
   useEffect(() => {
     const remainingDays = calculateRemainingDays(activeUser.createdAt);
@@ -109,13 +115,13 @@ function UserProfile() {
     if (remainingDays % 30 === 0) {
       updateCredits(activeUser.membership);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeUser]);
 
   return (
     <div className="userProfile">
-        <h2>Hello {activeUser.name}</h2>
-        <p>You have {activeUser.credits} credits left.</p>
+      <h2>Hello {activeUser.name}</h2>
+      <p>You have {activeUser.credits} credits left.</p>
       <h3>Your Closet:</h3>
       <p className="waitText">
         When you return an item, you have to wait for us to confirm receipt.
@@ -187,8 +193,7 @@ function UserProfile() {
           })}
         </ul>
       ) : (
-        <>
-        </>
+        <></>
       )}
     </div>
   );

@@ -5,7 +5,7 @@ import UserDetails from "../components/UserDetails";
 import MembershipChoice from "../components/MembershipChoice";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
 function SignUpPage(props) {
   const [email, setEmail] = useState("");

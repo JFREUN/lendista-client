@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
 function ProductDetailPage() {
   const [product, setProduct] = useState("");

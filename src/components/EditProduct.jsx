@@ -2,20 +2,21 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import service from "../api/service";
-import { useNavigate, useParams } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
-function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, update}) {
-  const [product, setProduct] = useState({});
+function EditProduct({
+  productId,
+  setShowEdit,
+  setHideAllProducts,
+  setUpdate,
+  update,
+}) {
   const storedToken = localStorage.getItem("authToken");
   const [name, setName] = useState("");
   const [credits, setCredits] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
   const [inStock, setInStock] = useState("");
-
-  const navigate = useNavigate();
-
 
   const getProduct = () => {
     axios
@@ -24,7 +25,6 @@ function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, upda
       })
       .then((response) => {
         const oneProduct = response.data;
-        setProduct(oneProduct);
         setName(oneProduct.name);
         setCredits(oneProduct.credits);
         setImageUrl(oneProduct.imageUrl);
@@ -63,7 +63,7 @@ function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, upda
         setShowEdit(false);
         setHideAllProducts(false);
       })
-      .catch(err => console.log("Edit Error: ", err))
+      .catch((err) => console.log("Edit Error: ", err));
   };
 
   const deleteProduct = () => {
@@ -72,12 +72,12 @@ function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, upda
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
-        setShowEdit(false)
-        setHideAllProducts(false)
-        setUpdate(!update)
+        setShowEdit(false);
+        setHideAllProducts(false);
+        setUpdate(!update);
       })
-      .catch((err) => console.log("Delete Error: ",err));
-  }
+      .catch((err) => console.log("Delete Error: ", err));
+  };
 
   useEffect(() => {
     getProduct();
@@ -86,9 +86,9 @@ function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, upda
   return (
     <div className="addProductPage">
       <form className="addProductForm" onSubmit={handleSubmit}>
-      <img className="editImg" src={imageUrl} alt="" />
+        <img className="editImg" src={imageUrl} alt="" />
 
-      <h3>Edit Product: {name} </h3>
+        <h3>Edit Product: {name} </h3>
         <label>
           Name:
           <input
@@ -99,9 +99,13 @@ function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, upda
         </label>
         <label>
           Credits
-          <input type="number"  value={credits} onChange={(e)=> setCredits(e.target.value)}/>
+          <input
+            type="number"
+            value={credits}
+            onChange={(e) => setCredits(e.target.value)}
+          />
         </label>
-      
+
         <label>
           Image:
           <input type="file" onChange={(e) => handleFileUpload(e)} />{" "}
@@ -131,8 +135,16 @@ function EditProduct({productId, setShowEdit,setHideAllProducts, setUpdate, upda
           </div>
         </label>
         <div className="editButtons">
-        <button type="submit" className="adminLink">Edit</button>
-        <button type="button" className="adminLink deleteBtn" onClick={deleteProduct}>Delete</button>
+          <button type="submit" className="adminLink">
+            Edit
+          </button>
+          <button
+            type="button"
+            className="adminLink deleteBtn"
+            onClick={deleteProduct}
+          >
+            Delete
+          </button>
         </div>
       </form>
     </div>

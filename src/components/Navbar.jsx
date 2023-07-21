@@ -23,14 +23,19 @@ function Navbar() {
           <h1>Lendista</h1>
         </Link>
         <div className="navLinks">
-        <DesktopNav></DesktopNav>
+          <DesktopNav></DesktopNav>
         </div>
 
         <Link>
-          <img src={hamburger} alt="menuIcon" onClick={handleShow} className="hamburger"/>
+          <img
+            src={hamburger}
+            alt="menuIcon"
+            onClick={handleShow}
+            className="hamburger"
+          />
         </Link>
       </nav>
-      {showNav && <MobileNav closeMenu={closeMenu}/>}
+      {showNav && <MobileNav closeMenu={closeMenu} />}
     </>
   );
 }

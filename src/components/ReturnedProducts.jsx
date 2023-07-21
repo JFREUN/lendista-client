@@ -1,12 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-const API_URL = "http://localhost:5005";
+const API_URL = "https://giddy-coveralls-bat.cyclic.app";
 
-function ReturnedProducts({ allProducts, update, setUpdate}) {
+function ReturnedProducts({ allProducts, update, setUpdate }) {
   const [returned, setReturned] = useState([]);
   const storedToken = localStorage.getItem("authToken");
-  
-
 
   const confirmReturn = (id, userId) => {
     axios
@@ -24,19 +22,19 @@ function ReturnedProducts({ allProducts, update, setUpdate}) {
           })
           .then((response) => {
             const user = response.data;
-  
+
             // Find the item in rentedProducts array
             const itemIndex = user.rentedProducts.findIndex(
               (item) => item._id === id
             );
-  
+
             if (itemIndex !== -1) {
               // Remove the item from rentedProducts
               const removedItem = user.rentedProducts.splice(itemIndex, 1)[0];
-  
+
               // Add the item to pastRented
               user.pastRented.push(removedItem);
-  
+
               // Update the user object on the server
               axios
                 .put(`${API_URL}/api/user/${userId}`, user, {
@@ -60,13 +58,11 @@ function ReturnedProducts({ allProducts, update, setUpdate}) {
         (item) => item.returned === true && item.inStock === false
       )
     );
-  }, [allProducts,update]);
+  }, [allProducts, update]);
 
   return (
     <div className="componentPage">
-        <h3>Returns to approve</h3>
-
-      {" "}
+      <h3>Returns to approve</h3>{" "}
       {returned.length > 0 ? (
         <table className="productTable">
           <thead>
@@ -85,7 +81,12 @@ function ReturnedProducts({ allProducts, update, setUpdate}) {
                   <td>{product.category}</td>
                   <td>Returned</td>
                   <td>
-                    <button onClick={() => confirmReturn(product._id, product.renter._id)} className="confirmBtn"> 
+                    <button
+                      onClick={() =>
+                        confirmReturn(product._id, product.renter._id)
+                      }
+                      className="confirmBtn"
+                    >
                       Confirm
                     </button>
                   </td>
